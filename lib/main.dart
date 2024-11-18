@@ -4,8 +4,8 @@ import 'package:flutter_application_1/my_googlemeet.dart';
 import 'package:flutter_application_1/my_productlist.dart';
 import 'package:flutter_application_1/my_shop.dart';
 import 'package:flutter_application_1/my_shoppingcart.dart';
-// import 'package:flutter_application_1/my_homepage.dart';
-// import 'package:flutter_application_1/my_place.dart';
+import 'package:flutter_application_1/my_homepage.dart';
+import 'package:flutter_application_1/my_place.dart';
 
 void main() {
   runApp(const MyApp());

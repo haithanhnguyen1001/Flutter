@@ -1,25 +1,18 @@
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:flutter_application_1/entity/myproduct.dart';
-import 'package:flutter_application_1/entity/product.dart';
+import 'package:http/http.dart' as http;
 
-class APIService {
-  static Future<List<MyProduct>> getAllProduct() async {
-    var dio = Dio();
-    var url = "https://fakestoreapi.com/products";
-    var response = await dio.request(
-      url,
-      options: Options(
-        method: 'GET',
-      ),
-    );
+class ApiService {
+  final String apiUrl = 'https://fakestoreapi.com/products';
+
+  Future<List<MyProduct>> fetchProducts() async {
+    final response = await http.get(Uri.parse(apiUrl));
+
     if (response.statusCode == 200) {
-      List<dynamic> result = response.data;
-      var ls = result.map((e) => MyProduct.fromJson(e)).toList();
-      return ls;
+      List<dynamic> data = jsonDecode(response.body);
+      return data.map((json) => MyProduct.fromJson(json)).toList();
     } else {
-      print(response.statusMessage);
-      throw Exception("Lỗi lấy dữ liệu");
+      throw Exception('Failed to load products');
     }
   }
 }
